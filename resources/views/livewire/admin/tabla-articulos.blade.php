@@ -1,32 +1,34 @@
 <div>
     <x-tabla>
-        <div class="px-6 py-4 flex item-center">
+        <div class="px-4 py-4 form-group row align-items-center">
 
-            <div class="flex items-center">
+            <div class="col-3 d-flex justify-content-center align-items-center">
                 <span>Mostrar</span>
 
-                <select wire:model="cant"
-                    class="mx-2 w-full pl-2 pr-8 py-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <select wire:model="cant" class="form-select mx-2" style="width: 75px;" >
                     <option value="10">10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
-                </select>
+                  </select>
 
                 <span>entradas</span>
 
             </div>
 
             {{-- input para buscar --}}
-            <x-jet-input type="text" id="inputBuscar" class='flex-1 mx-4' placeholder="Escriba su busqueda..."
-                wire:model="buscar" />
+            <div class="col-6">
+                <input type="text" class="form-control input-sm"  wire:model="buscar" placeholder="Escriba su busqueda...">
+            </div>
 
             {{-- Boton para llamar al modal de crear articulo --}}
-            @livewire('admin.nuevo-articulo')
+            <div class="col-3">
+                @livewire('admin.nuevo-articulo')
+            </div>
         </div>
         @if (count($articulos))
 
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="w-100 divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col"
@@ -136,14 +138,15 @@
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer">
                                     <i class="fas fa-edit"></i>
                                 </a> --}}
-                                <button wire:click="agStock({{ $art }}) "
-                                    class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
+                                <a wire:click="agStock({{ $art }}) "
+                                    class="">
+                                    {{-- <i class="px-1 fa-solid fa-plus"></i> --}}
+                                    <i class="px-1 fa-solid fa-circle-plus"></i>
+                                </a>
 
                                 <a wire:click="$emit('borrarArticulo',{{ $art->id }})"
-                                    class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer">
-                                    <i class="fas fa-trash"></i>
+                                    class="">
+                                    <i class="px-1 fas fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
@@ -267,8 +270,8 @@
                     text: "No podrá revertir los cambios!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
                     confirmButtonText: 'Si, eliminalo!',
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {

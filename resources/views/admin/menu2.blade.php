@@ -1,81 +1,129 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
-        @yield('head')
-    </head>
-    <body class="antialiased min-h-screen relative lg:flex" x-data="{open: false}">
-        <nav class="absolute inset-0 transform lg:transform-none lg:opacity-100 duration-200 lg:sticky z-10 w-80 bg-indigo-900 text-white h-screen p-3"
-        :class="{'translate-x-0 ease-in opacity-100':open == true, '-translate-x-full ease-out opacity-0':open == false}">
-            <div class="flex justify-between">
-                <span class="font-bold text-2xl sm:text-3xl p-2">Sidebar</span>
-                <button class="p-2 focus:outline-none focus:bg-indigo-800 hover:bg-indigo-800 rounded-md lg:hidden" @click="open = false">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/men.css">
+
+    <!-- Scripts -->
+    <script src="{{ mix('js/app.js') }}" defer></script>
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/889b4f6c92.js" crossorigin="anonymous"></script>
+    @yield('head')
+</head>
+
+<body class="">
+    <div class='dashboard'x-data="{ open: true }">
+        <div class='dashboard-app'>
+            <div class="dashboard-nav" x-show="open">
+                <header><a href="#!" id="sidebarBtn" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#"
+                        class="brand-logo"><i class="fas fa-anchor"></i> <span>BRAND</span></a></header>
+                <nav class="dashboard-nav-list" ><a href="#" class="dashboard-nav-item"><i class="fas fa-home"></i>
+                        Home </a><a href="#" class="dashboard-nav-item active"><i class="fas fa-tachometer-alt"></i>
+                        dashboard
+                    </a><a href="#" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Upload </a>
+                    <div class='dashboard-nav-dropdown'><a href="#!"
+                            class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-photo-video"></i>
+                            Media </a>
+                        <div class='dashboard-nav-dropdown-menu'><a href="#"
+                                class="dashboard-nav-dropdown-item">All</a><a href="#"
+                                class="dashboard-nav-dropdown-item">Recent</a><a href="#"
+                                class="dashboard-nav-dropdown-item">Images</a><a href="#"
+                                class="dashboard-nav-dropdown-item">Video</a></div>
+                    </div>
+                    <div class='dashboard-nav-dropdown'><a href="#!"
+                            class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-users"></i> Users </a>
+                        <div class='dashboard-nav-dropdown-menu'><a href="#"
+                                class="dashboard-nav-dropdown-item">All</a><a href="#"
+                                class="dashboard-nav-dropdown-item">Subscribed</a><a href="#"
+                                class="dashboard-nav-dropdown-item">Non-subscribed</a><a href="#"
+                                class="dashboard-nav-dropdown-item">Banned</a><a href="#"
+                                class="dashboard-nav-dropdown-item">New</a></div>
+                    </div>
+                    <div class='dashboard-nav-dropdown'><a href="#!"
+                            class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-money-check-alt"></i>
+                            Payments </a>
+                        <div class='dashboard-nav-dropdown-menu'><a href="#"
+                                class="dashboard-nav-dropdown-item">All</a><a href="#"
+                                class="dashboard-nav-dropdown-item">Recent</a><a href="#"
+                                class="dashboard-nav-dropdown-item"> Projections</a>
+                        </div>
+                    </div>
+                    <a href="#" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Settings </a><a href="#"
+                        class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
+                    <div class="nav-item-divider"></div>
+                    <a href="#" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
+                </nav>
             </div>
-
-            <ul class="mt-8">
-                <li>
-                    <a href="{{ route('admin.index') }}" class="block px-4 py-2 hover:bg-indigo-800 rounded-md">Inicio</a>
-                    <a href="{{ route('admin.clientes') }}" class="block px-4 py-2 hover:bg-indigo-800 rounded-md">Clientes</a>
-                    <a href="{{ route('admin.ventas') }}" class="block px-4 py-2 hover:bg-indigo-800 rounded-md">Ventas</a>
-                    <a href="{{ route('admin.articulos') }}" class="block px-4 py-2 hover:bg-indigo-800 rounded-md">Articulos</a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="relative z-0 lg:flex-grow">
-
-            <header class="flex bg-gray-700 text-white items-center px-3">
-                <button class="p-2 focus:outline-none focus:bg-gray-600 hover:bg-gray-600 rounded-md lg:hidden" @click="open = true">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                      </svg>
-                </button>
-                <span class="block text-2xl sm:text-3xl font-bold  p-4">Alphine</span>
+            <header class='dashboard-toolbar d-flex flex-row'><a href="#!" x-on:click="open= !open"  class="menu-toggle"><i class="fas fa-bars"></i></a>
             </header>
-
-            <div class="py-4 px-4">
-
-                @yield('content')
-                
+            <div class='dashboard-content d-flex flex-row'>
+                <div class='container'>
+                    <div class='card'>
+                        <div class='card-header'>
+                            <h1>Welcome back Jim</h1>
+                        </div>
+                        <div class='card-body'>
+                            <p>Your account type is: Administrator</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
-        @livewireScripts
-        <script src="{{ asset('js/sid.js') }}"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @livewireScripts
+    <script src="{{ asset('js/sid.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script>
-            Livewire.on('alert', function(message) {
-                Swal.fire(
-                    'Bien hecho!',
-                    message,
-                    'success'
-                )
-            })
+    <script>
+        Livewire.on('alert', function(message) {
+            Swal.fire(
+                'Bien hecho!',
+                message,
+                'success'
+            )
+        })
 
-            Livewire.on('alert2', function(message) {
-                Swal.fire(message)
-            })
-        </script>
-        @yield('js')
-    </body>
+        Livewire.on('alert2', function(message) {
+            Swal.fire(message)
+        })
+    </script>
+    <script>
+        const mobileScreen = window.matchMedia("(max-width: 990px )");
+        $(document).ready(function() {
+            $(".dashboard-nav-dropdown-toggle").click(function() {
+                $(this).closest(".dashboard-nav-dropdown")
+                    .toggleClass("show")
+                    .find(".dashboard-nav-dropdown")
+                    .removeClass("show");
+                $(this).parent()
+                    .siblings()
+                    .removeClass("show");
+            });
+            $(".menu-toggle").click(function() {
+                if (mobileScreen.matches) {
+                    $(".dashboard-nav").toggleClass("mobile-show");
+                } else {
+                    $(".dashboard").toggleClass("dashboard-compact");
+                }
+            });
+        });
+    </script>
+    @yield('js')
+</body>
+
 </html>

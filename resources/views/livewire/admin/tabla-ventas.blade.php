@@ -1,35 +1,36 @@
 <div>
     <x-tabla>
-        <div class="px-6 py-4 flex item-center">
+        <div class="px-4 py-4 form-group row align-items-center">
 
-            <div class="flex items-center">
+            <div class="col-3 d-flex justify-content-center align-items-center">
                 <span>Mostrar</span>
 
-                <select wire:model="cant"
-                    class="mx-2 w-full pl-2 pr-8 py-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <select wire:model="cant" class="form-select mx-2" style="width: 75px;" >
                     <option value="10">10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
-                </select>
+                  </select>
 
                 <span>entradas</span>
 
             </div>
 
             {{-- input para buscar --}}
-            <x-jet-input type="text" class='flex-1 mx-4' placeholder="Escriba su busqueda..." wire:model="buscar" />
+            <div class="col-6">
+                <input type="text" class="form-control input-sm"  wire:model="buscar" placeholder="Escriba su busqueda...">
+            </div>
 
             {{-- Boton para llamar al modal de crear cliente --}}
-            <a href="{{ route('admin.ventas.crear') }}">
-                <x-jet-button class="ml-2 disabled:opacity-25 bg-blue-500 hover:bg-blue-400 active:bg-blue-700">
+            <a href="{{ route('admin.ventas.crear') }}" class="col-3">
+                <x-jet-button >
                     Nueva Venta
                 </x-jet-button>
             </a>
         </div>
         @if ($ventas->count())
 
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="w-100 divide-y divide-gray-200 ">
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col"
@@ -155,18 +156,18 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium flex">
                                 {{-- @livewire('editar-cliente', ['cliente' => $cliente], key($cliente->id)) --}}
                                 <a wire:click="ver({{ $ven }})"
-                                    class="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer">
-                                    <i class="fas fa-eye"></i>
+                                    class="">
+                                    <i class="px-1 fas fa-eye"></i>
                                 </a>
 
                                 <a wire:click="editar({{ $ven }})"
-                                    class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer">
-                                    <i class="fas fa-edit"></i>
+                                    class="">
+                                    <i class="px-1 fas fa-edit"></i>
                                 </a>
 
-                                <a href="#" onclick="window.open('/pdf/'+{{$ven->id}}, '_blank' )" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer">
+                                <a href="#" onclick="window.open('/pdf/'+{{$ven->id}}, '_blank' )" class="">
                         
-                                    <i class="fa-solid fa-print"></i>
+                                    <i class="px-1 fa-solid fa-print"></i>
                                    
                                 </a>
 

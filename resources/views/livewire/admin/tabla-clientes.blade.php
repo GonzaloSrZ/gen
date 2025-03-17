@@ -1,32 +1,38 @@
 <div>
+
     <!-- This example requires Tailwind CSS v2.0+ -->
     <x-tabla>
-        <div class="px-6 py-4 flex item-center">
+        <div class="px-4 py-4 form-group row align-items-center">
 
-            <div class="flex items-center">
+            <div class="col-3 d-flex justify-content-center align-items-center">
                 <span>Mostrar</span>
 
-                <select wire:model="cant"
-                    class="mx-2 w-full pl-2 pr-8 py-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <select wire:model="cant" class="form-select mx-2" style="width: 75px;" >
                     <option value="10">10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
-                </select>
+                  </select>
 
                 <span>entradas</span>
 
             </div>
 
             {{-- input para buscar --}}
-            <x-jet-input type="text" class='flex-1 mx-4' placeholder="Escriba su busqueda..." wire:model="buscar" />
+
+            <div class="col-6">
+                <input type="text" class="form-control input-sm"  wire:model="buscar" placeholder="Escriba su busqueda...">
+            </div>
 
             {{-- Boton para llamar al modal de crear cliente --}}
-            @livewire('admin.crear-cliente')
+
+            <div class="col-3">
+                @livewire('admin.crear-cliente')
+            </div>
         </div>
         @if ($clientes->count())
 
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="w-100 divide-y divide-gray-200 ">
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col"
@@ -41,7 +47,6 @@
                                 @else
                                     <i class="fas fa-sort-alpha-down-alt float-right"></i>
                                 @endif
-
                             @else
                                 <i class="fas fa-sort float-right"></i>
                             @endif
@@ -58,7 +63,6 @@
                                 @else
                                     <i class="fas fa-sort-alpha-down-alt float-right"></i>
                                 @endif
-
                             @else
                                 <i class="fas fa-sort float-right"></i>
                             @endif
@@ -74,7 +78,6 @@
                                 @else
                                     <i class="fas fa-sort-alpha-down-alt float-right"></i>
                                 @endif
-
                             @else
                                 <i class="fas fa-sort float-right"></i>
                             @endif
@@ -90,7 +93,6 @@
                                 @else
                                     <i class="fas fa-sort-alpha-down-alt float-right"></i>
                                 @endif
-
                             @else
                                 <i class="fas fa-sort float-right"></i>
                             @endif
@@ -106,12 +108,12 @@
                                 @else
                                     <i class="fas fa-sort-alpha-down-alt float-right"></i>
                                 @endif
-
                             @else
                                 <i class="fas fa-sort float-right"></i>
                             @endif
                         </th>
                         <th scope="col" class="relative px-6 py-3">
+                            Accion
                             <span class="sr-only">Edit</span>
                         </th>
                     </tr>
@@ -134,21 +136,20 @@
                             <td class="px-6 py-4  text-sm text-gray-500">
                                 <div class="text-sm text-gray-900">{{ $cli->provincia }}</div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium flex">
+                            {{-- <td class="px-6 py-4 whitespace-nowrap text-sm font-medium flex"> --}}
+                            <td class="px-4 py-4 flex">
                                 {{-- @livewire('editar-cliente', ['cliente' => $cliente], key($cliente->id)) --}}
-                                <a wire:click="ver({{ $cli->id }})"
-                                    class="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer">
-                                    <i class="fas fa-eye"></i>
+                                <a wire:click="ver({{ $cli->id }})" class="">
+                                    <i class="px-1 fas fa-eye"></i>
                                 </a>
 
-                                <a wire:click="editar({{ $cli }})"
-                                    class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer">
-                                    <i class="fas fa-edit"></i>
+                                <a wire:click="editar({{ $cli }})" class="">
+                                    <i class="px-1 fas fa-edit"></i>
+
                                 </a>
 
-                                <a wire:click="$emit('borrarCliente',{{ $cli->id }})"
-                                    class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer">
-                                    <i class="fas fa-trash"></i>
+                                <a wire:click="$emit('borrarCliente',{{ $cli->id }})" class="">
+                                    <i class="px-1 fas fa-trash"></i>
                                 </a>
 
                             </td>
@@ -159,13 +160,10 @@
             </table>
 
             @if ($clientes->hasPages())
-
                 <div class="px-6 py-3">
                     {{ $clientes->links() }}
                 </div>
-
             @endif
-
         @else
             <div class="px-6 py-4">
                 No existe ningun registro
@@ -241,7 +239,7 @@
         </x-slot>
     </x-jet-dialog-modal>
 
-     <x-jet-dialog-modal wire:model="abrirVer"> {{-- VER CLIENTE --}}
+    <x-jet-dialog-modal wire:model="abrirVer"> {{-- VER CLIENTE --}}
         <x-slot name="title">
             Información del cliente
         </x-slot>
@@ -316,8 +314,8 @@
                     text: "No podrá revertir los cambios!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
                     confirmButtonText: 'Si, eliminalo!',
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
@@ -334,7 +332,6 @@
                 })
             })
         </script>
-
     @endsection
 
 </div>
